@@ -11,6 +11,8 @@ function conectar(){
     })
 }
 
+//Función para obtener todas las claves
+
 function claves(){
     return new Promise(async (ok,ko) => {
         try{
@@ -29,6 +31,8 @@ function claves(){
     })
 }
 
+//Función para obtener los claves según el tipo_id
+
 function obtenerTipos(tipo_id){
     return new Promise(async (ok, ko) => {
         try{
@@ -45,6 +49,8 @@ function obtenerTipos(tipo_id){
         }
     })
 }
+
+//Función para crear una nueva clave
 
 function crearClave({titulo,tipo_id,usuario,contraseña,tipo}){
     return new Promise(async (ok,ko) => {
@@ -64,6 +70,8 @@ function crearClave({titulo,tipo_id,usuario,contraseña,tipo}){
     })
 }
 
+//Función para borrar una clave por id
+
 function borrarClave(id){
     return new Promise(async(ok,ko) => {
         try{
@@ -82,6 +90,8 @@ function borrarClave(id){
     })
 }
 
+//Función para actualizar una clave
+
 function actualizarClave({id,titulo,tipo_id,usuario,contraseña,tipo}){
     return new Promise(async (ok,ko) => {
 
@@ -98,6 +108,8 @@ function actualizarClave({id,titulo,tipo_id,usuario,contraseña,tipo}){
         }
     })
 }
+
+//Función para obtener tanto el id como el nombre de la tabla tipos
 
 function tipos(){
     return new Promise(async (ok,ko) => {
@@ -117,8 +129,3 @@ function tipos(){
 }
 
 module.exports = {claves,tipos,obtenerTipos,crearClave,borrarClave,actualizarClave};
-
-
-
-
-

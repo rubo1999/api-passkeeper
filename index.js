@@ -14,6 +14,8 @@ if(process.env.PRUEBAS){
     servidor.use(express.static("./pruebas"))
 }
 
+//Ruta para obtener todas las claves
+
 servidor.get("/claves", async (peticion,respuesta) => {
     try{
         let resultado = await claves();
@@ -26,6 +28,8 @@ servidor.get("/claves", async (peticion,respuesta) => {
     }
 })
 
+//Ruta para obtener las claves por tipo_id delimitado entre 1 y 4 por expresión regular
+
 servidor.get("/claves/tipo/:tipo_id([1-4])", async(peticion,respuesta) => {
     try{
         let tipo_id = peticion.params.tipo_id;
@@ -36,6 +40,8 @@ servidor.get("/claves/tipo/:tipo_id([1-4])", async(peticion,respuesta) => {
         respuesta.json(error);
     }
 })
+
+//Ruta para obtener los datos de la tabla tipos
 
 servidor.get("/claves/tipo", async(peticion,respuesta) => {
     try{
@@ -48,6 +54,8 @@ servidor.get("/claves/tipo", async(peticion,respuesta) => {
         respuesta.json(error)
     }
 }) 
+
+//Ruta para crear una nueva clave
 
 servidor.post("/claves/nueva", async (peticion,respuesta,siguiente) => {
 
@@ -71,6 +79,8 @@ servidor.post("/claves/nueva", async (peticion,respuesta,siguiente) => {
     }
 })
 
+//Ruta para borrar una clave por id que tiene que ser un número del 0-9 una o más veces
+
 
 servidor.delete("/claves/borrar/:id([0-9]+)", async(peticion,respuesta) => {
     try{
@@ -83,6 +93,8 @@ servidor.delete("/claves/borrar/:id([0-9]+)", async(peticion,respuesta) => {
         respuesta.json(error);
     }
 })
+
+//Ruta para actualizar una clave por id que tiene que ser un número del 0-9 una o más veces
 
 servidor.put("/claves/actualizar/:id([0-9]+)", async(peticion,respuesta,siguiente) => {
     let {titulo,tipo_id,usuario,contraseña,tipo} = peticion.body;
@@ -100,10 +112,14 @@ servidor.put("/claves/actualizar/:id([0-9]+)", async(peticion,respuesta,siguient
     }
 })
 
+//Middleware para procesar rutas no encontradas
+
 servidor.use((peticion,respuesta) => {
     respuesta.status(404);
     respuesta.json({error : "recurso no encontrado"});
 })
+
+//Middleware para manejar errores en las peticiones
 
 servidor.use((error,peticion,respuesta,siguiente) => {
     respuesta.status(400);
