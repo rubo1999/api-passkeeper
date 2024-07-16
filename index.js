@@ -5,13 +5,13 @@ const {json} = require("body-parser");
 const cors = require("cors");
 const {claves,tipos,obtenerTipos,crearClave,borrarClave,actualizarClave} = require("./db");
 
-const servidor = express()
+const servidor = express();
 
 servidor.use(cors());
 servidor.use(json());
 
 if(process.env.PRUEBAS){
-    servidor.use(express.static("./pruebas"))
+    servidor.use(express.static("./pruebas"));
 }
 
 //Ruta para obtener todas las claves
@@ -50,8 +50,8 @@ servidor.get("/claves/tipo", async(peticion,respuesta) => {
         respuesta.json(resultado);
     }
     catch(error){
-        respuesta.status(500)
-        respuesta.json(error)
+        respuesta.status(500);
+        respuesta.json(error);
     }
 }) 
 
@@ -59,7 +59,7 @@ servidor.get("/claves/tipo", async(peticion,respuesta) => {
 
 servidor.post("/claves/nueva", async (peticion,respuesta,siguiente) => {
 
-    let {titulo,tipo_id,usuario,contraseña,tipo} = peticion.body;
+    let {titulo,tipo_id,usuario,contraseña,tipo} = peticion.body; //Para extraer los campos del cuerpo de la solicitud
     
     if(!titulo || titulo.trim() == "" || !tipo_id || !usuario || usuario.trim() == "" || !contraseña || contraseña.trim() == "" || !tipo || tipo.trim() == ""){
         return siguiente(true);
@@ -97,7 +97,7 @@ servidor.delete("/claves/borrar/:id([0-9]+)", async(peticion,respuesta) => {
 //Ruta para actualizar una clave por id que tiene que ser un número del 0-9 una o más veces
 
 servidor.put("/claves/actualizar/:id([0-9]+)", async(peticion,respuesta,siguiente) => {
-    let {titulo,tipo_id,usuario,contraseña,tipo} = peticion.body;
+    let {titulo,tipo_id,usuario,contraseña,tipo} = peticion.body;//Para extraer los campos del cuerpo de la solicitud
     
     if(!titulo || titulo.trim() == "" || !tipo_id || !usuario || usuario.trim() == "" || !contraseña || contraseña.trim() == "" || !tipo || tipo.trim() == ""){
         return siguiente(true);
