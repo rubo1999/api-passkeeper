@@ -66,7 +66,6 @@ servidor.post("/claves/nueva", async (peticion,respuesta,siguiente) => {
     }
 
     try{
-
         let id = await crearClave(peticion.body);
 
         respuesta.json({id});
